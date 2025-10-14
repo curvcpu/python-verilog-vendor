@@ -14,12 +14,14 @@ git subtree split --prefix=src/utils -b dist-utils # (re)creates/advances the sp
 git push -f origin dist-utils # force is fine; this branch is derived
 ```
 
+However, it is not necessary to do this manually. A [GitHub Actions workflow](.github/workflows/update-dist-utils.yml) is set up to do the above automatically on every push to `main`.
+
 In the other repo that will vendor this updated code, in order to copy the contents of `src/utils` into `src/PACKAGE_NAME/_vendor/utils` do this:
 
 ```sh
 # once, in outer repo:
 git remote add utils git@github.com:mikegoelzer/python-verilog-vendor.git
-git subtree add  --prefix=src/PACKAGE_NAME/_vendor/utils utils dist-utils --squash
+git subtree add --prefix=src/PACKAGE_NAME/_vendor/utils utils dist-utils --squash
 ```
 
 For the next round of changes:

@@ -1,0 +1,47 @@
+name: Update dist-utils split
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write  # needed to push with GITHUB_TOKEN
+
+jobs:
+  split-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # subtree split needs history
+
+      - name: Ensure we're on main (safety)
+        run: |
+          git checkout -f main
+          git pull --ff-only
+
+      - name: Compute split SHA (contents of src/utils)
+        id: split
+        shell: bash
+        run: |
+          set -euo pipefail
+          PREFIX="src/utils"
+          SPLIT_SHA=$(git subtree split -P "$PREFIX")
+          echo "SPLIT_SHA=$SPLIT_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Push to dist-utils (only if changed)
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET_BRANCH="dist-utils"
+          REMOTE_SHA=$(git ls-remote origin "refs/heads/$TARGET_BRANCH" | cut -f1 || true)
+          echo "Remote tip: ${REMOTE_SHA:-<none>}"
+          echo "New split:  ${{ steps.split.outputs.SPLIT_SHA }}"
+          if [ "${{ steps.split.outputs.SPLIT_SHA }}" = "$REMOTE_SHA" ]; then
+            echo "No changes to push."
+            exit 0
+          fi
+          # Force-push because split is a filtered history rewrite
+          git push origin "${{ steps.split.outputs.SPLIT_SHA }}:refs/heads/$TARGET_BRANCH" --force
