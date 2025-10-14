@@ -4,7 +4,7 @@ import pytest
 import tempfile
 import os
 from pathlib import Path
-from utils.shellutils import Which # type: ignore
+from utils.shellutils import Which
 
 class TestWhich:
     """Tests for the Which class."""

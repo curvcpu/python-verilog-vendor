@@ -1,4 +1,3 @@
-import shutil
 import sys
 from typing import Optional
 from enum import Enum
