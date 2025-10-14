@@ -1,6 +1,6 @@
 # `python-verilog-vendor`
 
-Collection of simple python functions and classes related to build/test/codegen for Verilog/SystemVerilog projects that are vendored into other python packages.
+Collection of simple python functions and classes related to build/test/codegen for Verilog and SystemVerilog projects that are vendored into other python packages.
 
 ## Usage
 
