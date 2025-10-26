@@ -4,12 +4,12 @@ Collection of simple python functions and classes related to build/test/codegen 
 
 ## Usage
 
-This repo was set up for code in `src/utils` to be vendored other repos like this:
+This repo was set up for code in `src/utils` to be vendored other repos in the following manner:
 
 ```sh
 # in this repo, when changes on main are ready for other repos to vendor
-git checkout main
-git pull --ff-only   # if changes aren't on your local main yet
+git checkout main    # just to make sure you're up to date...
+git pull --ff-only
 git subtree split --prefix=src/utils -b dist-utils # (re)creates/advances the split branch
 git push -f origin dist-utils # force is fine; this branch is derived
 ```

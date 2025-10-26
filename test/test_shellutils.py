@@ -5,6 +5,7 @@ import tempfile
 import os
 from pathlib import Path
 from utils.shellutils import Which
+from utils.shellutils import get_console_width, get_console_height
 
 class TestWhich:
     """Tests for the Which class."""
@@ -65,3 +66,17 @@ class TestWhich:
         assert Which.OnMissingAction.WARNING.value == "warning"
         assert Which.OnMissingAction.ERROR_AND_RAISE.value == "error_and_raise"
 
+class TestConsole:
+    """Tests for the console module."""
+
+    def test_get_console_width(self):
+        """Test that get_console_width returns the width of the console."""
+        width = get_console_width()
+        assert width > 0
+        assert width <= 1_000_000
+
+    def test_get_console_height(self):
+        """Test that get_console_height returns the height of the console."""
+        height = get_console_height()
+        assert height > 0
+        assert height <= 1_000_000

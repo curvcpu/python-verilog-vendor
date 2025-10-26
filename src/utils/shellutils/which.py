@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Optional
 import shutil
 
-# can be imported as part of the utils package or just as directory imports, so we handle both cases
+# can be imported as part of the pyutils package or just as directory imports, so we handle both cases
 try:
     from utils.colors import AnsiColorsTool
 except ModuleNotFoundError:
