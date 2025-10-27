@@ -56,7 +56,7 @@ In the repo that will vendor this updated code, in order to copy the contents of
 
 ```sh
 # once, in the other repo that will vendor in this repo
-git remote add utils git@github.com:mikegoelzer/python-verilog-vendor.git
+git remote add utils git@github.com:curv/python-verilog-vendor.git
 git subtree add --prefix=src/PACKAGE_NAME/_vendor/utils utils dist-utils --squash
 ```
 
