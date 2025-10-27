@@ -32,20 +32,21 @@ This repo was set up for code in `src/utils` to be vendored other repos in the f
   - Commit your changes to `main`, or stash them.
 
   - In your local checkout of this repo, we will make the latest commits available for others to vendor.  First, make sure your local is up to date:
-    ```sh
-    # in this repo
-    # (just to make sure you're up to date...)
-    git checkout main    
-    git pull --ff-only
-    ```
+
+      ```sh
+      # in this repo
+      # (just to make sure you're up to date...)
+      git checkout main
+      git pull --ff-only
+      ```
 
   - Now, recreate the split branch and force pursh it to `dist-utils` branch on the outer repo:
 
-    ```sh
-    # in this repo's directory
-    git subtree split --prefix=src/utils -b dist-utils # (re)creates/advances the split branch
-    git push -f origin dist-utils # force is fine; this branch is derived
-    ```
+     ```sh
+     # in this repo's directory
+     git subtree split --prefix=src/utils -b dist-utils # (re)creates/advances the split branch
+     git push -f origin dist-utils # force is fine; this branch  is derived
+     ```
 
 However, it is not necessary to do this manually. A [GitHub Actions workflow](.github/workflows/update-dist-utils.yml) is set up to do the above automatically on every push to `main`.  
 
