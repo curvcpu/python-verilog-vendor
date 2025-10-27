@@ -15,7 +15,7 @@ def _tty_width_height() -> tuple[int, int]:
     for s in (sys.stdout, sys.stderr, sys.stdin):
         try:
             if s.isatty():
-                return os.get_terminal_size(s.fileno()).lines, os.get_terminal_size(s.fileno()).columns
+                return os.get_terminal_size(s.fileno()).columns, os.get_terminal_size(s.fileno()).lines
         except (OSError, ValueError, AttributeError):
             pass
 
@@ -30,9 +30,10 @@ def _tty_width_height() -> tuple[int, int]:
         pass
 
     # 3) last resort (does NOT trust env vars)
-    return shutil.get_terminal_size(fallback=(80, 24)).lines, shutil.get_terminal_size(fallback=(80, 24)).columns
+    return shutil.get_terminal_size(fallback=(80, 24)).columns, shutil.get_terminal_size(fallback=(80, 24)).lines
 
 def get_console_width() -> int:
+    print(f"get_console_width: {_tty_width_height()[0]}")
     return _tty_width_height()[0]
 
 def get_console_height() -> int:
