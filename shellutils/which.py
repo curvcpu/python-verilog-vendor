@@ -8,7 +8,7 @@ import shutil
 try:
     from utils.colors import AnsiColorsTool
 except ModuleNotFoundError:
-    from colors.ansi import AnsiColorsTool
+    from ..colors.ansi import AnsiColorsTool
 
 class Which:
     """

@@ -1,5 +1,5 @@
 import sys
-from utils.shellutils import Which
+from ..shellutils import Which
 import subprocess
 
 def print_delta(file_path1: str, file_path2: str):
